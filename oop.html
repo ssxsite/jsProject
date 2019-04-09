@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>面向对象</title>
+</head>
+<body>
+<p>用js写出所有实现面向对象继承的方法，并说出各种方法的优缺点</p>
+<script type="text/javascript">
+    /*方法一，构造函数实现继承,缺点：只能实现部分继承，如果父类的属性在构造函数里面，子类是可以继承到的，如果父类的原型上还有其他属性，子类是继承不到的*/
+    function Parent1() {
+        this.name = 'name'
+    }
+    Parent1.prototype.say = function () {
+        console.log("hello")
+    }
+
+    function Child1() {
+        Parent1.call(this)
+        this.child = 'child'
+    }
+    var o1 = new Child1()
+    // console.log("o1",o1)
+    // console.log("o1",o1.say())
+
+    /*方法二，prototype继承1，缺点：实例共享的是同一份原型对象的数据，不能实现实例数据单独化*/
+    function Parent2() {
+        this.name = 'name'
+        this.list = [1,2,3]
+    }
+
+    function Child2() {
+        this.child = 'child'
+    }
+    Child2.prototype = new Parent2()
+    // var o2 = new Child2()
+    // var o22 = new Child2()
+    //
+    // o2.list.push(4)
+    // console.log("o2",o2.list)
+    // console.log("o22",o22.list)
+
+
+    /* 方法三，prototype继承2，缺点：父类的构造函数执行了两次 */
+    function Parent3() {
+        this.name = 'name'
+        this.list = [1,2,3]
+    }
+
+    function Child3() {
+        Parent3.call(this)
+        this.child = 'child'
+    }
+    Child3.prototype = new Parent3()
+    // var o3 = new Child3()
+    // var o32 = new Child3()
+    // o3.list.push(4)
+    // console.log("o3.list",o3.list)
+    // console.log("o32.list",o32.list)
+    // console.log("o3",o3)
+    // console.log("o32",o32)
+
+    /*方法四，prototype继承2，缺点：子类实例找不到直接父亲了*/
+    function Parent4() {
+        this.name = 'name'
+        this.list = [1,2,3]
+    }
+
+    function Child4() {
+        Parent4.call(this)
+        this.child = 'child'
+    }
+    Child4.prototype = Parent4.prototype
+    // var o4 = new Child4()
+    // var o42 = new Child4()
+    // console.log("o4",o4.constructor)
+    // console.log("o42",o42.constructor)
+
+    /*方法五，prototype继承3*/
+    function Parent5() {
+        this.name = 'name'
+        this.list = [1,2,3]
+    }
+
+    var Student = function (name,age) {
+        Person.call(this,name)
+        this.age = age
+    }
+    Student.prototype = Object.create(Person.prototype)
+    Student.prototype.constructor = Student
+    Student.prototype.setName = function(name){
+        this.name = name
+    }
+
+    var s = new Student('ssx',18)
+    s.getName()
+    s.setName(20)
+
+
+
+    Child5.prototype.toString = function () {
+        console.log("new toString")
+    }
+    var o5 = new Child5()
+    var o52 = new Child5()
+    o5.list.push(4)
+    console.log(o5.constructor)
+    console.log(o5.list)
+    console.log(o52.constructor)
+    console.log(o52.list)
+
+    console.log(o5.toString)
+    console.log(o52.toString)
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    function Vue(name) {
+        this.name = name
+        this.mount()
+    }
+    Vue.prototype.mount = function () {
+        console.log("this",this)
+        return $mount.call(this)
+    }
+    const $mount = Vue.prototype.mount
+
+    var dom1 = new Vue('ssx')
+
+
+</script>
+</body>
+</html>

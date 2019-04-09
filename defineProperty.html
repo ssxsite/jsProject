@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p id="test"></p>
+<script type="text/javascript">
+    var msg = 'ssx'
+
+    var vm = {}
+    vm.data = {}
+
+    var sharedData = {}
+    sharedData.get = function getMsg(){
+        return msg
+    }
+    sharedData.set = function setMsg(val){
+        msg = val
+    }
+
+    Object.defineProperty(vm.data,'msg',sharedData)
+
+    var testDom = document.querySelector('#test')
+    testDom.textContent = vm.data.msg
+
+    setTimeout(() =>{
+        vm.data.msg = 'hhha'
+    },2000)
+</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>判断一个字符串中出现次数最多的字符，并统计次数</title>
+</head>
+<body>
+<script type="text/javascript">
+    var s = 'aaabbbcccaaabbbaaa';
+    var obj = {}
+    var maxLetter = ''
+    var time = 0;
+    var tempArr = s.split('')
+    var len = tempArr.length;
+    for(var i  = 0; i <len;i++){
+        if(obj[tempArr[i]]){
+            obj[tempArr[i]]++;
+            maxLetter = tempArr[i];
+            time = obj[tempArr[i]];
+        }else {
+            obj[tempArr[i]] = 1
+        }
+    }
+    console.log(maxLetter,time)
+</script>
+<script type="text/javascript">
+    var s = 'aaabbbcccaaabbbaaabbbbbbbbbb';
+    var a = s.split('');
+    a.sort();
+    s = a.join('');
+    var pattern = /(\w)\1*/g;
+    var ans = s.match(pattern);
+    ans.sort(function(a, b) {
+        return a.length < b.length;
+    });
+    console.log(ans)
+</script>
+</body>
+</html>

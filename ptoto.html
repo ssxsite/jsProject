@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原型链</title>
+</head>
+<body>
+
+<p>js创建对象的3种方式</p>
+<script type="text/javascript">
+    /*第一种*/
+    var obj1 = {name:'ssx'}
+    var obj11 = new Object({name:'ssx'})
+    console.log('1------',obj1.__proto__ === Object.prototype)
+    console.log('11',obj11.__proto__ === Object.prototype)
+    console.log('12',Object.prototype.__proto__ === null)
+    console.log('13',Object === Object.prototype.constructor)
+    console.log('14',Object.prototype === obj11.__proto__)
+
+    /*第二种*/
+    function foo(name) {
+        this.name = name
+    }
+    var obj2 = new foo('ssx')
+    console.log('21---',obj2.__proto__ === foo.prototype)
+    console.log('22----',foo.prototype.__proto__ === Object.prototype)
+    console.log('23----',foo.prototype === obj2.__proto__)
+    console.log('24----',obj2.__proto__.constructor === foo)
+    console.log('25----',obj2.__proto__.__proto__ === Object.prototype)
+    console.log('26----',obj2.__proto__.__proto__.__proto__ === null)
+    console.log('27----',foo.prototype.constructor === foo)
+    console.log('28----',obj2 instanceof Object)
+    console.log('29----',obj2.__proto__.__proto__ === Object.prototype)
+    console.log('30----',obj2.prototype === undefined)
+    console.log('31----',foo.prototype)
+    console.log('32----',foo.__proto__ === Function.prototype)
+    console.log('33----',obj2.__proto__.constructor === foo)
+    /*第三种*/
+    var yuan = {name:'ssx'}
+    var obj3 = Object.create(yuan)
+    console.log('31',obj3.__proto__ === yuan)
+
+    /*function constructor*/
+    function f1(x,y) {
+        this.x = x;
+        this.y = y;
+    }
+    f1.prototype.toString = function () {
+        console.log("new toString")
+    }
+
+    console.log(f1.__proto__.constructor)
+
+
+    /*我们知道js所有数据结构都是对象，所有对象都会有其原型对象*/
+    var n = 3
+    console.log("Number-----------")
+    console.log(n.__proto__ === Number.prototype)
+    console.log(Number.prototype.constructor === Number)
+
+    var s = 'ssss'
+    console.log("String-----------")
+    console.log(s.__proto__ === String.prototype)
+    console.log(String.prototype.constructor === String)
+
+    var boo = true
+    console.log("Boolean-----------")
+    console.log(boo.__proto__ === Boolean.prototype)
+    console.log(Boolean.prototype.constructor === Boolean)
+
+    var arr = [1,2,3]
+    console.log("Array-----------")
+    console.log(arr.__proto__ === Array.prototype)
+    console.log(Array.prototype.constructor === Array)
+
+    function f1() {
+    }
+    console.log("Function-----------")
+    console.log(f1.__proto__ === Function.prototype)
+    console.log(Function.prototype.constructor === Function)
+
+    var o = {name:'ssx'}
+    console.log("Object-----------")
+    console.log(o.__proto__ === Object.prototype)
+    console.log(Object.prototype.constructor === Object)
+
+    /*Object 和 Function的关系*/
+    console.log('OF-------')
+    console.log(Object.__proto__ === Function.prototype)
+    console.log(Function.__proto__.__proto__ === Object.prototype)
+
+    /* new 关键字到底做了什么？*/
+    function testF(name){
+        this.name = name
+    }
+    var testObj = new testF('ssx')
+    console.log("testObj------",testObj)
+
+    function newF(fun,arg) {
+        let o = Object.create(fun.prototype)
+        let temp = fun.call(o,arg)
+        if(typeof temp === 'Object'){
+            return temp
+        }else {
+            return o
+        }
+    }
+
+    var testObj2 = newF(testF,'ssx')
+    console.log("testObj2------",testObj2)
+
+</script>
+</body>
+</html>

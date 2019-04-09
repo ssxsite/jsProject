@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script type="text/javascript">
+        var vm = {}
+        var data = {name:'ssx'}
+        Object.defineProperty(vm,'name',{
+            get:function () {
+                return data['name']
+            },
+            set:function (newVal) {
+                data['name'] = newVal
+            }
+        })
+        console.log("vm",vm)
+    </script>
+</body>
+</html>

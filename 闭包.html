@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>闭包</p>
+<a href="https://blog.csdn.net/dovlie/article/details/76339244">闭包</a>
+<script type="text/javascript">
+    (function (window,fun) {
+        fun(window)
+    })(window,function (window) {
+        var a = 'ssx'
+        var jQuery = function(){
+            console.log("i am jQuery",a)
+        }
+        window.$ = jQuery
+        return jQuery
+    })
+
+    console.log("$-----",window.$)
+
+</script>
+</body>
+</html>

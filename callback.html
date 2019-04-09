@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+  function loadImg(src,callback,fail) {
+      var img = document.createElement('img')
+      img.src = src
+      img.onload = function () {
+          callback(img)
+      }
+      img.onerror = function () {
+          fail()
+      }
+  }
+
+  function test2(callback) {
+        console.log('test2')
+        callback(src,callback,fail)
+    }
+
+    function test3(callback){
+        console.log('test3')
+        callback()
+    }
+
+  var src = 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1287814793,457485829&fm=26&gp=0.jpg'
+
+
+  loadImg(src,function (img) {
+      console.log("img",img)
+      setTimeout(()=>{
+          console.log("width")
+          setTimeout(()=>{
+              console.log("height")
+          },0)
+      },0)
+  },function () {
+      console.log("图片加载报错")
+      setTimeout(()=>{
+          console.log("图片宽度报错")
+          setTimeout(()=>{
+              console.log("图片高度报错")
+          },0)
+      },0)
+  })
+
+
+
+
+</script>
+
+
+</body>
+</html>

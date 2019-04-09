@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js运行机制</title>
+</head>
+<body>
+<p>异步单线程。异步任务总是在同步执行完再执行</p>
+<!--<script type="text/javascript">-->
+    <!--setTimeout(()=>{-->
+        <!--console.log("ssx")-->
+    <!--},0)-->
+    <!--for (let i = 0; i< 100000; i++){-->
+        <!--console.log(i)-->
+    <!--}-->
+<!--</script>-->
+<script type="text/javascript">
+    /* 依次输出1,2,3,4*/
+    for (let i = 0; i <4;i++){
+        setTimeout(function () {
+            console.log(i)
+        },1000)
+    }
+    /* */
+    for (var i = 0; i <4;i++){
+        setTimeout(function () {
+            console.log(i)
+        },2000)
+    }
+</script>
+</body>
+</html>

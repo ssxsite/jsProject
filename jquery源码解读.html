@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="https://blog.csdn.net/qq_33706382/article/details/78178459">jQuery 源码解读</a>
+<p>1.jQuery 闭包结构 </p>
+<script type="text/javascript">
+    var $ = (function (window,undefined) {
+        var a = 'hahah'
+        // jQuery 代码,为了不在jQuery定义的变量影响到不污染全局作用域。因为外部读取不到里面，里面可以读取到外面。
+        function jQuery() {
+            console.log("jQuery")
+        }
+        return jQuery
+    })(window)
+    console.log("jQuery",$)
+</script>
+<p>2.为什么支持jQuery 有new 和 无 new 构造实例？</p>
+<script type="text/javascript">
+    /*jQuery.fn.init.prototype = jQuery.fn;*/
+</script>
+<p>3.jQuery 的链式调用及回溯？</p>
+<p>另一个让大家喜爱使用 jQuery 的原因是它的链式调用，这一点的实现其实很简单，只需要在要实现链式调用的方法的返回结果里，返回 this ，就能够实现链式调用了。</p>
+
+</body>
+</html>

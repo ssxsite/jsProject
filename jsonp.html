@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    function createScript(url, charset) {
+        var script = document.createElement('script')
+        script.setAttribute('src', url)
+        script.setAttribute('type', 'text/javascript')
+        charset && script.setAttribute('charset', charset)
+        script.async = true
+        return script
+    }
+
+    function getJsonp(url, success, error, charset) {
+        var url = url += '&callback'
+        var script = createScript(url, charset)
+        window.Jsonp1 = function () {
+            if (success && typeof success === 'function') {
+                success(arguments[0])
+            }
+        }
+
+        script.onload = script.onreadystatechange = function () {
+            if (!script.readyState || /loaded | complete/.test(script.readyState)) {
+                script.onload = script.onreadystatechange = null
+                if (script.parentNode) {
+                    script.parentNode.removeChild(script)
+                }
+            }
+            window.Jsonp1 = null
+        }
+        script.onerror = function () {
+            error()
+        }
+
+        document.getElementsByTagName('head')[0].appendChild(script)
+    }
+
+    getJsonp('http://127.0.0.1:8887/?jsonp', function (data) {
+        var data = JSON.parse(data)
+        console.log("Jsonp1.data", data.name)
+    }, function () {
+        console.log("jsonp 请求失败")
+    }, 'UTF-8')
+</script>
+</body>
+</html>
