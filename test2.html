@@ -7,9 +7,37 @@
 <body>
 <div onclick="test()">test</div>
 <script type="text/javascript">
-    function test() {
-        alert(111)
-    }
+    var exampleBinder = {};
+    exampleBinder.modelObserver = (function() {
+        /* 私有变量 */
+        return {
+            observe: function(model) {
+                /* 代码 */
+                return newModel;
+            },
+            onChange: function(callback) {
+                /* 代码 */
+            }
+        }
+    })();
+    exampleBinder.viewAdaptor = (function() {
+        /* 私有变量 */
+        return {
+            bind: function(model) {
+                /* 代码 */
+            }
+        }
+    })();
+
+    exampleBinder.bind = function(model) {
+        /* 私有变量 */
+        exampleBinder.modelObserver.onChange(/* 回调callback */);
+        var om = exampleBinder.modelObserver.observe(model);
+        exampleBinder.viewAdaptor.bind(om);
+        return om;
+    };
+
+    console.log("111",exampleBinder)
 </script>
 </body>
 </html>

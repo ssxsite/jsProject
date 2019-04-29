@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>js for forEach区别 </title>
+</head>
+
+<body>
+<script type="text/javascript">
+    let arr = [1, 2, 3, 4]
+    for(let i = 0; i < arr.length; i++) {
+        if(arr[i] == 2) {
+            continue;
+            //break;
+        }
+        console.log(arr[i], '  for')
+    }
+    for(let i in arr) {
+        if(i == 2) {
+            break;
+        }
+        console.log(arr[i], '   for in')
+    }
+    for(let i of arr) {
+        if(i == 2) {
+            break;
+        }
+        console.log(i, '   for of')
+    }
+    arr.forEach(val => {
+        if(val == 2) {
+            //此处的return false 仅仅相当于continue
+            return false;
+            //break或者continue均不能使用 会报错，对于map filter方法一样会报错
+            //break;
+            //continue
+        }
+        val += 1
+        console.log(val, '   forEach',arr)
+    })
+    console.log(arr)
+</script>
+</body>
+
+</html>
